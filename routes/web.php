@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SigninController;
 use App\Http\Controllers\Usercontroller;
+use App\Http\Controllers\EmailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ Route::group(['middleware' => 'auth'], function() {
         return view('home');
     })->name('home');
 
+    /** Users */
     Route::get('/users', [Usercontroller::class, 'index'])->name('users.index');
 
     Route::get('/users/create', function () {
@@ -41,6 +43,20 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::post('/users/search', [Usercontroller::class, 'search'])
     ->name('users.search');
+
+    /** End users */
+
+    /** Emails massives */
+    Route::get('/emails', [EmailsController::class, 'index'])->name('emails.index');
+
+    Route::get('/emails/create', function () {
+        return view('dashboard.email.create');
+    })->name('emails.create');
+
+    Route::post('/emails/store', [EmailsController::class, 'store'])
+    ->name('emails.store');
+
+    /** End Emails massives */
 
     Route::get('/logout', [SigninController::class, 'logout'])
     ->name('login.logout');

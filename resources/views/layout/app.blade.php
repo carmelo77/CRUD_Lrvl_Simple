@@ -38,6 +38,12 @@
                 </li>
 
                 <li>
+                    <a class="font-semibold hover:bg-indigo-700 py-4 px-3 rounded-md" href="{{ route('emails.index') }}">
+                        Emails
+                    </a>
+                </li>
+
+                <li>
                     <a class="font-semibold hover:bg-indigo-700 py-4 px-3 rounded-md" href="{{ route('login.logout') }}">
                         Logout
                     </a>
