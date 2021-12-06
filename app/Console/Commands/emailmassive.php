@@ -15,7 +15,7 @@ class emailmassive extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'email:massive';
 
     /**
      * The console command description.
@@ -49,8 +49,7 @@ class emailmassive extends Command
                 $val->status = 'send';
                 $val->save();
             } catch (\Throwable $th) {
-                //throw $th;
-                Log('Has error ocurred in: ' . $th->getMessage() . 'líne' . $th->getLine());
+                throw $th;
             }
         }
     }
