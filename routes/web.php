@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SigninController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Group routes when user is auth
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/', function () {
+        return view('home');
+    })->name('home');
 });
+
+
+//View login
+Route::get('/login', [SigninController::class, 'create'])
+->middleware('guest')
+->name('login.index');
+
+//Auth Signin action
+Route::post('/signin', [SigninController::class, 'login'])
+->middleware('guest')
+->name('login.signin');
