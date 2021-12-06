@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SigninController;
+use App\Http\Controllers\Usercontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,30 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/', function () {
         return view('home');
     })->name('home');
+
+    Route::get('/users', [Usercontroller::class, 'index'])->name('users.index');
+
+    Route::get('/users/create', function () {
+        return view('dashboard.user.create');
+    })->name('users.create');
+
+    Route::post('/users/store', [Usercontroller::class, 'store'])
+    ->name('users.store');
+
+    Route::get('/users/edit/{id}', [Usercontroller::class, 'edit'])
+    ->name('users.edit');
+
+    Route::put('/users/update/{id}', [Usercontroller::class, 'update'])
+    ->name('users.update');
+
+    Route::delete('/users/destroy', [Usercontroller::class, 'destroy'])
+    ->name('users.destroy');
+
+    Route::post('/users/search', [Usercontroller::class, 'search'])
+    ->name('users.search');
+
+    Route::get('/logout', [SigninController::class, 'logout'])
+    ->name('login.logout');
 });
 
 
